@@ -19,7 +19,7 @@ see more by --help.
 @click.command()
 @click.option('-i', '--inbam', help='Input bam file', 
                     required=True, type=click.Path(exists=True))
-@click.option('-s', '--inseq', help='Input read fastq file', 
+@click.option('-s', '--inseq', help='Input read fasta file', 
                     required=True, type=click.Path(exists=True))                    
 @click.option('-o', '--out', help='Output adapter information of each read', required=True)
 @click.option('-t', '--threads', required=False, default=10, help='Number of threads to use. (default: 10)')
