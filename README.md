@@ -3,6 +3,8 @@ The analysis pipeline for FLEP-seq
 
 This toolset can be used to analyze the sequencing data generated either by Nanopore or by PacBio using the FLEP-seq method.
 
+The example scripts for ploting: https://nbviewer.jupyter.org/github/ZhaiLab-SUSTech/FLEPSeq/blob/master/script/FLEP.figure_example.ipynb
+
 Reference: https://www.nature.com/articles/s41477-020-0688-1
 
 Jia, J., Long, Y., Zhang, H. et al. Post-transcriptional splicing of nascent RNA contributes to widespread intron retention in plants. Nat. Plants 6, 780–788 (2020). https://doi.org/10.1038/s41477-020-0688-1
