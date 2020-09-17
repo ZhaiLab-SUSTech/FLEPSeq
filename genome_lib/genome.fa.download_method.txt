@@ -1,0 +1,12 @@
+Please download TAIR10 genome from https://www.arabidopsis.org.
+Note:
+chromatin name in bed file is:
+chr1
+chr2
+chr3
+chr4
+chr5
+chrC
+chrM
+
+You can use `sed` to modify them.
