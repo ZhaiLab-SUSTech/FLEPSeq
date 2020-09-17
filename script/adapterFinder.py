@@ -95,7 +95,7 @@ def main(inbam, inseq, out, threads):
     read adapter type based on the primer types of both ends:
     for example: F-R indicate the 5' primer is F, the 3' primer is F
     Each kind of primer type is assigned a score, and also can predict the 
-    rna_strand by primer type, seed `type2strand` variable value: The score 1 
+    rna_strand by primer type, see `type2strand` variable value: The score 1 
     or 2 is reliable.
     """
     

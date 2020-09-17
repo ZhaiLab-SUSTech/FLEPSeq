@@ -16,12 +16,12 @@ see more in help.
 @click.option('-i', '--indir', help='Input directory containg fastq files with suffirx ".fastq"', 
                     required=True, type=click.Path(exists=True))
 @click.option('-o', '--out', help='Output fasta file', required=True)
-def main(indir, output):
+def main(indir, out):
     """
     Convert fastq files with suffirx ".fastq" in specific directory to one fasta file.
     """
     FASTQ_SUFFIX = ".fastq"
-    fastq_dir_to_fasta(indir, output, FASTQ_SUFFIX)
+    fastq_dir_to_fasta(indir, out, FASTQ_SUFFIX)
              
 def list_all_fastq(in_dir, suffix=".fastq", add_path=1):
     files = [filename for filename in os.listdir(in_dir) if filename.endswith(suffix)]

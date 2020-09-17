@@ -18,14 +18,14 @@ See more by --help.
 @click.option('-f', '--inbed', help='Input bed file', 
                     required=True, type=click.Path(exists=True))                    
 @click.option('-o', '--out', help='Output Bam file', required=True)
-def main(inbam, inbed, outbam):
+def main(inbam, inbed, out):
     """
     Remove the reads overlapped with specific features recorded in a bed file
     from original bam file. You need use samtools index to index the resulted 
     bam file.
     """
     remove_read_ids = get_read_id_by_bed(inbam, inbed)
-    filter_read_id_bam(inbam, outbam, remove_read_ids)
+    filter_read_id_bam(inbam, out, remove_read_ids)
 
 def get_read_id_by_bed(file_bam, file_bed):
     #0-based position

@@ -150,7 +150,10 @@ def main(inbam, inbed, out):
         first read exon of the read overlapping with it, thus `f_read_exon_num` is 1.
         f_pos5 and f_pos3 is the position of the read exon 1 relative the exon1, the value is like 
         mRNA_pos5 and mRNA_pos3.
-        l_feature: 
+        l_feature: the 3' end feature overlapping with this read, in this example, it is the 
+        second intron: intron2, thus `l_feature_type` is "intron", `l_feature_num` is 2, it is the
+        second read exon of the read overlapping with it,  thus `l_read_exon_num` is 2.
+        
 
     \b
     intron retention:
