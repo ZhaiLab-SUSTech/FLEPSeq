@@ -321,7 +321,8 @@ read  end_type: 0                  >>>>>>>>>>>>>>>
     #	     noend5 end5
     #noend3      0    1
     #end3        2    3
-	
+```
+
 6. primer/adapter
 
 ```
@@ -365,13 +366,12 @@ for example:
 read1      f_primer--------------------------->GGAGAGAGAG
 ```
 
-```
 one end primer type
 
 (a) no alignment
        ["N", ["", "", -1, -1, -1, -1, ""]]
 	   
-(b) if "F" primer, if primer_start > primer_f_max_start: UF
+(b) If "F" primer, if primer_start > primer_f_max_start: UF
 
 (c) if "R" primer, if primer_start > primer_r_max_start2: UUR
 
