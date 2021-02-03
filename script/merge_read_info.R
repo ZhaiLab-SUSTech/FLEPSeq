@@ -71,27 +71,32 @@ MIN_POLYA_LENGTH <- 15
 MAX_SPLICE_INTERMEDIATE_LEFT_LENGTH <- -10
 MAX_SPLICE_INTERMEDIATE_RIGHT_LENGTH <- 10
 READ_THROUGH_LENGTH <- 10000
+END3_ALIGNMENT_SCORE_LIMIT <- c(-5, 5
 
-check_3_end_high_mapping <- function(data, limit=c(-5, 5)){
-    extract_nf_value <- function(data){
-		if ("r_align_start" %in% colnames(data)){
-			# nanopore data
-		    a <- (data$r_align_start - data$r_primer_start) - data$genome_align_end
-		    b <- data$genome_align_start - (data$f_align_end + data$f_primer_start)
-		    c <- data$rna_strand==data$read_strand
-		    v <- b
-		    v[c] <- a[c]
-		} else {
-			# pacbio data
-			v <- rep(0, nrow(data))
-		}
-		return(v)
-    }
-    v <- extract_nf_value(data)
-    f <- (v >= limit[1]) & (v <= limit[2])
-    return(f)
+extract_end3_score_value <- function(data){
+	if ("r_align_start" %in% colnames(data)){
+		# nanopore data
+		#for elongating
+	    a <- (data$r_align_start - data$r_primer_start) - data$genome_align_end
+	    b <- data$genome_align_start - (data$f_align_end + data$f_primer_start)
+	    c <- data$rna_strand==data$read_strand
+	    v <- b
+	    v[c] <- a[c]
+		#for polya
+	    a1 <- data$polya_start_base - data$genome_align_end - 1
+	    b1 <- data$genome_align_start - data$polya_end_base - 1
+	    c1 <- data$rna_strand==data$read_strand
+	    v1 <- b1
+	    v1[c1] <- a1[c1]
+		
+		c2 <- data$polyA_type==1
+		v[c2] <- v1[c2]
+	} else {
+		# pacbio data
+		v <- rep(0, nrow(data))
+	}
+	return(v)
 }
-
 
 #1. merge primer, retention, polyA file to `data`
 #filter out duplicated read_core_id lines
@@ -143,7 +148,17 @@ data$end5ss_type[f1 | f2] <- 1
 
 #4. type
 if (data_type == "Nanopore"){
-	data$end3_high_mapping <- check_3_end_high_mapping(data)
+
+	check_3_end_high_mapping <- function(data, limit=c(-5, 5)){
+		#no gap is 0. overlap is -1.
+		#you must cal polyA_type before
+	    v <- extract_nf_value(data)
+	    f <- (v >= limit[1]) & (v <= limit[2])
+	    return(f)
+	}
+	
+	data$end3_alignment_score <- extract_end3_score_value(data)
+	data$end3_high_mapping <- (data$end3_alignment_score >= END3_ALIGNMENT_SCORE_LIMIT[1]) & (data$end3_alignment_score <= END3_ALIGNMENT_SCORE_LIMIT[2])
 	data$type <- ""
 	data$type[(data$end_polyA_type %in% c(1, 3)) & (data$end3_high_mapping) & (data$end5ss_type == 0)] <- "elongating"
 	data$type[(data$end_polyA_type %in% c(1, 3)) & (data$end3_high_mapping) & (data$end5ss_type == 1)] <- "splicing_intermediate"
