@@ -71,7 +71,7 @@ MIN_POLYA_LENGTH <- 15
 MAX_SPLICE_INTERMEDIATE_LEFT_LENGTH <- -10
 MAX_SPLICE_INTERMEDIATE_RIGHT_LENGTH <- 10
 READ_THROUGH_LENGTH <- 10000
-END3_ALIGNMENT_SCORE_LIMIT <- c(-5, 5
+END3_ALIGNMENT_SCORE_LIMIT <- c(-5, 5)
 
 extract_end3_score_value <- function(data){
 	if ("r_align_start" %in% colnames(data)){
@@ -147,16 +147,7 @@ f2 <- (!f0) & (data$l_feature_length + data$l_pos3 <= MAX_SPLICE_INTERMEDIATE_RI
 data$end5ss_type[f1 | f2] <- 1
 
 #4. type
-if (data_type == "Nanopore"){
-
-	check_3_end_high_mapping <- function(data, limit=c(-5, 5)){
-		#no gap is 0. overlap is -1.
-		#you must cal polyA_type before
-	    v <- extract_nf_value(data)
-	    f <- (v >= limit[1]) & (v <= limit[2])
-	    return(f)
-	}
-	
+if (data_type == "Nanopore"){	
 	data$end3_alignment_score <- extract_end3_score_value(data)
 	data$end3_high_mapping <- (data$end3_alignment_score >= END3_ALIGNMENT_SCORE_LIMIT[1]) & (data$end3_alignment_score <= END3_ALIGNMENT_SCORE_LIMIT[2])
 	data$type <- ""
