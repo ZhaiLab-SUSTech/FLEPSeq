@@ -1,6 +1,8 @@
 library(tidyverse)
 library(optparse)
 
+#Version 0.1.1 Jia Jinbu 2021.02.03
+#add end3_alignment_scoreend3_alignment_score
 #Jia Jinbu, 2020.09.15
 
 #Note: This script will filter out duplicated read_core_id lines
@@ -98,6 +100,12 @@ extract_end3_score_value <- function(data){
 	return(v)
 }
 
+check_3_end_high_mapping <- function(data, limit=c(-5, 5)){
+     v <- extract_end3_score_value(data)
+     f <- (v >= limit[1]) & (v <= limit[2])
+     return(f)
+ }
+ 
 #1. merge primer, retention, polyA file to `data`
 #filter out duplicated read_core_id lines
 if (data_type == "Nanopore"){
@@ -148,8 +156,8 @@ data$end5ss_type[f1 | f2] <- 1
 
 #4. type
 if (data_type == "Nanopore"){	
-	data$end3_alignment_score <- extract_end3_score_value(data)
-	data$end3_high_mapping <- (data$end3_alignment_score >= END3_ALIGNMENT_SCORE_LIMIT[1]) & (data$end3_alignment_score <= END3_ALIGNMENT_SCORE_LIMIT[2])
+	data$end3_high_mapping <- check_3_end_high_mapping(data)
+	data$low_accuracy_3end_mapped <- !data$end3_high_mapping
 	data$type <- ""
 	data$type[(data$end_polyA_type %in% c(1, 3)) & (data$end3_high_mapping) & (data$end5ss_type == 0)] <- "elongating"
 	data$type[(data$end_polyA_type %in% c(1, 3)) & (data$end3_high_mapping) & (data$end5ss_type == 1)] <- "splicing_intermediate"
