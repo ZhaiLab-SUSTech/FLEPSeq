@@ -11,13 +11,13 @@ Jia, J., Long, Y., Zhang, H. et al. Post-transcriptional splicing of nascent RNA
 
 # Software and package requirements
 
-* MinKNOW (MinION software)  (required for Nanopore sequencing)
-* Guppy v4.0.11 or above (required for Nanopore data basecalling )
+* MinKNOW (MinION software) (https://community.nanoporetech.com/downloads) (required for Nanopore sequencing)
+* Guppy v4.0.11 or above (https://community.nanoporetech.com/downloads) (required for Nanopore data basecalling )
 * CCS (https://github.com/PacificBiosciences/ccs) (required for PacBio data analysis)
 * Lima (https://github.com/PacificBiosciences/barcoding) (required for PacBio data analysis)
-* Minimap2
-* SAMtools
-* BLAST+ (require for Nanopore data analysis)
+* Minimap2 (https://github.com/lh3/minimap2)
+* SAMtools (http://www.htslib.org/)
+* BLAST+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) (require for Nanopore data analysis)
 * Python 3.7 or above, and following packages:
   * Pysam (https://github.com/pysam-developers/pysam)
   * ont_fast5_api (https://github.com/nanoporetech/ont_fast5_api)
