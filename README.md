@@ -100,7 +100,7 @@ $ Rscript merge_read_info.R --type Nanopore --inreadinfo read_info.result.txt --
 9.	Analyze splicing kinetics
 
 ```
-$ python prepare_data_for_splice_kinetics.py --inreadinfo read.info.txt --inbed lib/exon_intron_pos.repr.txt --out read.intron.pos.splicing.txt
+$ python prepare_data_for_splice_kinetics.py --inreadinfo read.info.txt --inbed lib/exon_intron_pos.repr.bed --out read.intron.pos.splicing.txt
 $ Rscript plot_intron_splicing_kinetics.R --inrelpos read.intron.pos.splicing.txt --inreadinfo read.info.txt --inintron lib/select_introns.txt --out read.splicing_kinetics.txt --pdf read.splicing_kinetics.pdf 
 ```
 
