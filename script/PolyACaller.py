@@ -331,7 +331,7 @@ class Fast5Read():
         
     def find_polyA(self, find_base="A", start_base=None, end_base=None, 
                    min_polya_length=15, match_score=1, mismatch_score=-1.5,
-                   long_event_base_ratio=20):
+                   long_event_base_ratio=15):
         #not greedy
         
         #if not provide start_base and end_base, search total read
